@@ -1,2 +1,5 @@
-# GeoKylin.github.io
-GeoKylin's Pages
+# GeoKylin
+
+GeoKylin's Home Page
+
+Website: https://geokylin.github.io
