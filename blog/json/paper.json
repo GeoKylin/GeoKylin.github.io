@@ -1,16 +1,16 @@
 [
   {
-    "title": "样例文章1",
-    "date": "2019-02-07",
-    "words": "1394",
-    "postLink": "WarAndPeace.html",
-    "time": "3",
-    "category": "Test",
+    "title": "Ruby 概述",
+    "date": "2019-01-29",
+    "words": "1353",
+    "postLink": "rubyOutline.html",
+    "time": "4",
+    "category": "Ruby",
     "tags": [
-      "小说",
-      "百科"
+      "编程语言",
+      "入门"
     ],
-    "summary": "<p><a href=\"https://baike.baidu.com/item/战争与和平/9134429?fr=aladdin\" target=\"_blank\" rel=\"noopener\">《战争与和平》</a>是俄国作家<a href=\"https://baike.baidu.com/item/列夫·尼古拉耶维奇·托尔斯泰/1250657\" target=\"_blank\" rel=\"noopener\">列夫·尼古拉耶维奇·托尔斯泰</a>创作的长篇小说，也是其代表作，创作于1863—1869年。</p><p>该作以1812年的卫国战争为中心，反映从1805到1820年间的重大历史事件。以鲍尔康斯、别祖霍夫、罗斯托夫和库拉金四大贵族的经历为主线，在战争与和平的交替描写中把众多的事件和人物串联起来&hellip;</p>"
+    "summary": "<p><a href=\"https://en.wikipedia.org/wiki/Twitter\" target=\"_blank\">Twitter</a> 创意总监罗宾·斯隆（Robin Sloan）在他的长篇小说<a href=\"https://book.douban.com/subject/25857034/\" target=\"_blank\">《生命之书》</a>中将红宝石（Ruby）语言赞誉为最为优美的编程语言，Ruby 语言的优美正符合了 Matz 在设计 Ruby 时的指导思想——“Ruby 是作为一门令程序员快乐的语言而设计的”。现在，让我们来了解一下这一饱受赞誉的编程语言 Ruby ...</p>"
   }
 ]
 

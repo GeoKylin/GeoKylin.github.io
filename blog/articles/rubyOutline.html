@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>Ruby概述 | GeoKylin</title>
+    <meta property="og:title" content="Ruby概述 | GeoKylin"/>
+    <meta itemprop="name" content="Ruby概述 | GeoKylin">
+    <meta name="twitter:title" content="Ruby概述 | GeoKylin"/>
+    <meta name="description" content="Twitter 创意总监罗宾·斯隆（Robin Sloan）在他的长篇小说《生命之书》中将红宝石（Ruby）语言赞誉为最为优美的编程语言，Ruby 语言的优美正符合了 Matz 在设计 Ruby 时的指导思想——“Ruby 是作为一门令程序员快乐的语言而设计的”。现在，让我们来了解一下这一饱受赞誉的编程语言 Ruby。"/>
+    <meta property="og:description" content="Twitter 创意总监罗宾·斯隆（Robin Sloan）在他的长篇小说《生命之书》中将红宝石（Ruby）语言赞誉为最为优美的编程语言，Ruby 语言的优美正符合了 Matz 在设计 Ruby 时的指导思想——“Ruby 是作为一门令程序员快乐的语言而设计的”。现在，让我们来了解一下这一饱受赞誉的编程语言 Ruby。"/>
+    <meta itemprop="description" content="Twitter 创意总监罗宾·斯隆（Robin Sloan）在他的长篇小说《生命之书》中将红宝石（Ruby）语言赞誉为最为优美的编程语言，Ruby 语言的优美正符合了 Matz 在设计 Ruby 时的指导思想——“Ruby 是作为一门令程序员快乐的语言而设计的”。现在，让我们来了解一下这一饱受赞誉的编程语言 Ruby。">
+    <meta name="twitter:description" content="Twitter 创意总监罗宾·斯隆（Robin Sloan）在他的长篇小说《生命之书》中将红宝石（Ruby）语言赞誉为最为优美的编程语言，Ruby 语言的优美正符合了 Matz 在设计 Ruby 时的指导思想——“Ruby 是作为一门令程序员快乐的语言而设计的”。现在，让我们来了解一下这一饱受赞誉的编程语言 Ruby。"/>
+    <meta name="keywords" content="Ruby概述, GeoKylin, 王锴, KaiWang, 博客, blog, 地球物理学, Geophysics, 地震学, Seismology"/>
+    <meta itemprop="keywords" content="Ruby概述, GeoKylin, 王锴, KaiWang, 博客, blog, 地球物理学, Geophysics, 地震学, Seismology"/>
+    <link rel="canonical" href="https://geokylin.github.io/blog/articles/rubyOutline.html"/>
+    <meta property="og:url" content="https://geokylin.github.io/blog/articles/rubyOutline.html"/>
+    <meta property="article:published_time" content="2019-01-29T00:00:00&#43;08:00"/>
+    <meta property="article:modified_time" content="2019-01-29T00:00:00&#43;08:00"/>
+    <meta itemprop="datePublished" content="2019-01-29T00:00:00&#43;08:00"/>
+    <meta itemprop="dateModified" content="2019-01-29T00:00:00&#43;08:00"/>
+    <meta itemprop="wordCount" content="1353">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="robots" content="index, follow">
+    <meta name="renderer" content="webkit"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta http-equiv="Cache-Control" content="no-transform"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="theme-color" content="#f8f5ec"/>
+    <meta name="msapplication-navbutton-color" content="#f8f5ec">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+    <meta name="author" content="GeoKylin"/>
+    <meta name="generator" content="Hugo 0.53 with even 4.0.0"/>
+    <link rel="shortcut icon" type=image/x-icon href=../../img/favicon.png>
+    <link rel=icon type=image/x-icon href=../../img/favicon.png>
+    <link rel="apple-touch-icon" type=image/x-icon href="../../img/favicon.png">
+    <link rel="manifest" href="../man/manifest.json">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="../css/even.c1094c8f.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css"
+          integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+    <link rel=stylesheet href=https://use.fontawesome.com/releases/v5.6.0/css/all.css crossorigin=anonymous>
+    <meta property="og:type" content="article"/>
+    <meta name="twitter:card" content="summary"/>
+    <!--[if lte IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body style="background-color: rgba(250,250,250,0.5)">
+<div id="mobile-navbar" class="mobile-navbar"></div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu"></nav>
+<div class="container" id="mobile-panel">
+    <header id="header" class="header" style="background-color: rgba(250,250,250,0.5)"></header>
+    <main id="main" class="main">
+        <div class="content-wrapper">
+            <div id="content" class="content">
+                <article class="post">
+
+                    <header class="post-header">
+                        <h1 class="post-title"><b>Ruby 概述</b></h1>
+                        <div class="post-meta">
+                            <span class="post-time">
+                                <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                2019-01-29
+                            </span>
+                            <span class="more-meta">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                约 1353 字
+                            </span>
+                            <span class="more-meta">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                预计阅读 4 分钟
+                            </span>
+                            <span id="busuanzi_container_page_pv" class="more-meta">
+                                <i class="far fa-eye" aria-hidden="true"></i>
+                                <span id="busuanzi_value_page_pv">
+                                    <img src="../img/spinner.svg" alt="spinner.svg"/>
+                                </span>
+                                次阅读
+                            </span>
+                            <span class="more-meta">
+                                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                    <a href="../categories/Ruby/">Ruby</a>
+                                </span>
+                            <div class="post-tags">
+                                <i class="fa fa-tag" aria-hidden="true"></i>
+                                <a href="../tags/编程语言/">编程语言</a>
+                                <i class="fa fa-tag" aria-hidden="true"></i>
+                                <a href="../tags/入门/">入门</a>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!----------------------- 目录 ---------------------->
+                    <div class="post-toc" id="post-toc">
+                        <h2 class="post-toc-title">文章目录</h2>
+                        <div class="post-toc-content">
+                            <nav id="TableOfContents">
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li><a href="#发展历史">Ruby 的发展历史</a></li>
+                                            <li><a href="#面向对象">Ruby 是一门完全面向对象的编程语言</a></li>
+                                            <li><a href="#语言特性">Ruby 语言的特性</a></li>
+                                            <li><a href="#一些概念">Ruby 中的一些概念</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!----------------------- 正文 ---------------------->
+                    <div class="post-content">
+                        <blockquote>
+                            <p><i>“我想最大程度地减少编程的难度，因此想最大程度地减少编程的劳动。这就是我设计 <a href="https://en.wikipedia.org/wiki/Ruby_(programming_language)" target="_blank">Ruby</a> 的主要目标。我想让自己快乐地编程。”</i>——<a href="https://en.wikipedia.org/wiki/Yukihiro_Matsumoto" target="_blank">松本行弘（Matz）</a>，Ruby之父</p>
+                        </blockquote>
+
+                        <p><a href="https://en.wikipedia.org/wiki/Twitter" target="_blank">Twitter</a> 创意总监罗宾·斯隆（Robin Sloan）在他的长篇小说<a href="https://book.douban.com/subject/25857034/" target="_blank">《生命之书》</a>中将红宝石（Ruby）语言赞誉为最为优美的编程语言，Ruby 语言的优美正符合了 Matz 在设计 Ruby 时的指导思想——“Ruby 是作为一门令程序员快乐的语言而设计的”。现在，让我们来了解一下这一饱受赞誉的编程语言 Ruby。</p>
+
+                        <h2 id="发展历史"><b>Ruby 的发展历史</b></h2>
+                        <p>Ruby 被许多人认为是一种“新”编程语言，但实际上是由松本行弘“Matz”（Yukihiro Matsumoto）于 1993 年开始着手研发，并于 1995 年公开发布的。Matz 自我描述为一个“语言极客”，是 <a href="https://en.wikipedia.org/wiki/Perl" target="_blank">Perl</a> 的粉丝，他对 Ruby 的想法是创建一种像 Perl 这样灵活而强大的语言，但在其语法上更具表现力，甚至可以具有类似于英语那样的可读性。</p>
+                        <p>1995 年 12 月 21 日，日本国内新闻组第一次公开发布了 Ruby 0.95，随后，Ruby 凭借其独特的魅力在日本迅速成长，但直到 2000 年，仍然没有除了日文外的任何 Ruby 文档，同年，Ruby 在日本比 <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" target="_blank">Python</a> 更受欢迎。</p>
+                        <p>2000 年，敏捷编程的先驱 Dave Thomas 被 Ruby 迷住，并决定创建 Ruby 的其它语言文档。自此，Ruby 在英语世界中缓慢成长，到 2005 年，美国的 Ruby 社区已达数百个。</p>
+                        <p>其后，随着 <a href="https://en.wikipedia.org/wiki/Ruby_on_Rails" target="_blank">Rails</a> 的大紫大红之后，Ruby 已经逐渐成为主流脚本语言中的重要一员，并在各种平台上开花结果。如今，Ruby 经常位于全球编程语言成长和流行度指数的前十名（比如 <a href="https://www.tiobe.com/tiobe-index/" target="_blank">TIOBE</a>），各种 Ruby 及 Rails 方面的图书也如雨后春笋般涌现。</p>
+
+                        <h2 id="面向对象"><b>Ruby 是一门完全面向对象的编程语言</b></h2>
+                        <p>Ruby 是一门<a href="https://en.wikipedia.org/wiki/Dynamic_programming_language" target="_blank">动态的</a>、<a href="https://en.wikipedia.org/wiki/Interpreted_language" target="_blank">解释性的</a>、<a href="https://en.wikipedia.org/wiki/Reflection_(computer_science)" target="_blank">反射的</a>、<a href="https://en.wikipedia.org/wiki/Object-oriented_programming_language" target="_blank">面向对象</a>的<a href="https://en.wikipedia.org/wiki/General-purpose_programming_language" target="_blank">通用编程语言</a>。</p>
+                        <p>在 Ruby 中，一切皆对象，是一 <b>门完全的</b> 面向对象的编程语言。所有的信息和代码都拥有属性和行为，即便是简单的数值字面量，以及 <code>true</code>、<code>false</code> 和 <code>nil</code>（Ruby 版的 <code>null</code>）也是如此。</p>
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="nx">puts </span><span class="k">"#{</span><span class="s1">1</span><span class="p">.</span><span class="nx">class</span><span class="k">}"</span>	<span class="c1">#输出：Fixnum</span>
+<span class="nx">puts </span><span class="k">"#{</span><span class="s1">1.0</span><span class="p">.</span><span class="nx">class</span><span class="k">}"</span>	<span class="c1">#输出：Float</span>
+<span class="nx">puts </span><span class="k">"#{</span><span class="s1">true</span><span class="p">.</span><span class="nx">class</span><span class="k">}"</span>	<span class="c1">#输出：TrueClass</span>
+<span class="nx">puts </span><span class="k">"#{</span><span class="s1">false</span><span class="p">.</span><span class="nx">class</span><span class="k">}"</span>	<span class="c1">#输出：FalseClass</span>
+<span class="nx">puts </span><span class="k">"#{</span><span class="s1">nil</span><span class="p">.</span><span class="nx">class</span><span class="k">}"</span>	<span class="c1">#输出：NilClass</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>在许多语言中，数字和其它基本类型都不是对象。而 Ruby 受 <a href="https://en.wikipedia.org/wiki/Smalltalk" target="_blank">Smalltalk</a> 语言影响，所有类型都可以赋予方法和实例变量。这一点让 Ruby 特别易于使用，因为适用于对象的规则适用于 Ruby 中的一切。</p>
+
+                        <div class="admonition tip"><p class="admonition-title">Tip</p>
+                            <p>
+                                本文中的代码片段可在 <a>https://geokylin.github.com/</a> 中 <code>ruby_outline.rb</code> 查看。
+                            </p>
+                        </div>
+
+                        <h2 id="语言特性"><b>Ruby 语言的特性</b></h2>
+                        <ul>
+                            <li><p><b>字符串是可变的：</b>Ruby 定义了各种方法对字符串进行就地更改，包括插入、替换、删除、追加等，而不改变对象本身，这与 <a href="https://en.wikipedia.org/wiki/Java_(programming_language)" target="_blank">Java</a> 有着很大的不同；</p></li>
+                            <li><p><b>Ruby 条件式和循环中：</b><code>nil</code> 值被当做 <code>false</code> 来处理，而任何其他值都和 <code>true</code> 一样处理，也即期望空字符串 <code>""</code> 能像 <code>false</code> 那样工作，这与 <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a> 或者 <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> 有着很大不同，因为它们期望 <code>0</code> 能够像 <code>false</code> 那样工作；</p></li>
+                            <li><p><b>变量没有类型：</b>Ruby 的变量可以保存任何类型的数据；</p></li>
+                            <li><p><b>Ruby 语言很优雅</b>：可以做到不需要任何注释就可以读懂；</p></li>
+                            <li><p><b>Ruby 是一门相当灵活的语言，允许用户改变自身：</b>Ruby 的核心部分可以更改，也可以重新定义。Ruby 的运算符只是语法糖（syntactic sugar），随时可以重定义；</p></li>
+                            <li><p><b>Ruby 提供不依赖操作系统的线程：</b>所以，不管操作系统是否支持，Ruby 支持的所有操作系统都可以使用多线程，甚至是 MS-DOS；</p></li>
+                            <li><p><b>Ruby 高度可移植：</b>它主要在 GNU/Linux 上开发，但也支持很多类型的 UNIX，以及 macOS，Windows，DOS，BeOS，OS/2 等；</p></li>
+                            <li><p><b>Ruby 完全免费，</b>还可以自由使用、复制、修改和分发。</p></li>
+                        </ul>
+
+                        <h2 id="一些概念"><b>Ruby 中的一些概念</b></h2>
+                        <ol>
+                            <li><p><b>迭代器与代码块：</b><code>times</code> 和 <code>upto</code> 是由整数对象实现的方法，它们被称为迭代器，包含在花括号中的代码被称为代码块，数组和哈希对象也有相似的方法；</p></li>
+
+                            <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                            <div class="highlight">
+                                <div class="chroma">
+                                    <table class="lntable">
+                                        <tr>
+                                            <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre>
+                                            </td>
+                                            <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="s1">3</span><span class="p">.</span><span class="nx">times </span><span class="p">{ </span><span class="nx">print </span><span class="k">"hello! " </span><span class="p">}</span>	<span class="c1">#输出：hello! hello! hello!</span>
+<span class="nx">print </span><span class="p">"</span><span class="s1">\n</span><span class="p">"</span>
+<span class="s1">0</span><span class="p">.</span><span class="nx">upto</span><span class="p">(</span><span class="s1">9</span><span class="p">) { |</span><span class="s1">i</span><span class="p">| </span><span class="nx">print </span><span class="s1">i </span><span class="p">}	</span><span class="c1">#输出：0123456789</span>
+<span class="nx">print </span><span class="p">"</span><span class="s1">\n</span><span class="p">"</span>
+<span class="s1">9</span><span class="p">.</span><span class="nx">downto</span><span class="p">(</span><span class="s1">0</span><span class="p">) { |</span><span class="s1">i</span><span class="p">| </span><span class="nx">print </span><span class="s1">i </span><span class="p">}	</span><span class="c1">#输出：9876543210</span>
+<span class="nx">print </span><span class="p">"</span><span class="s1">\n</span><span class="p">"</span>
+</code></pre>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <li><p><b>方法：</b>Ruby 中用 <code>def</code> 来定义方法，以 <code>end</code> 结尾，方法中最后一个表达式的值是方法的输出；</p></li>
+
+                            <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                            <div class="highlight">
+                                <div class="chroma">
+                                    <table class="lntable">
+                                        <tr>
+                                            <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre>
+                                            </td>
+                                            <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">def </span><span class="nx">sqr</span><span class="p">(</span><span class="s1">x</span><span class="p">)</span>
+    <span class="s1">x</span><span class="p">*</span><span class="s1">x</span>
+<span class="p">end</span>
+<span class="nx">puts </span><span class="k">"3^2 = #{</span><span class="nx">sqr</span><span class="p">(</span><span class="s1">3</span><span class="p">)</span><span class="k">}"	</span><span class="c1">#输出：3^2 = 9</span>
+</code></pre>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <li><p><b>赋值：</b>Ruby 支持并行赋值，允许赋值表达式左右包含多个值或变量；</p></li>
+
+                            <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                            <div class="highlight">
+                                <div class="chroma">
+                                    <table class="lntable">
+                                        <tr>
+                                            <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre>
+                                            </td>
+                                            <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="s1">a</span><span class="p">,</span><span class="s1">b </span><span class="p">= </span><span class="s1">0</span><span class="p">,</span><span class="s1">1</span>
+<span class="nx">puts </span><span class="k">"a = #{</span><span class="s1">a</span><span class="k">}, b = #{</span><span class="s1">b</span><span class="k">}"	</span><span class="c1">#输出：a = 0, b = 1</span>
+</code></pre>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <li><p><b>前缀和后缀：</b><code>=</code>结尾的方法与赋值操作的功能类似，<code>?</code>结尾的方法用于返回 <code>Boolean</code> 类型的值，<code>!</code>结尾的方法会修改原对象。全局变量以<code>$</code>为前缀，实例变量以<code>@</code>为前缀，类变量以<code>@@</code>为前缀。</p></li>
+                        </ol>
+                    </div>
+
+                    <div class="post-copyright">
+                        <p class="copyright-item">
+                            <span class="item-title">本文链接</span>
+                            <span class="item-content">
+                                <a href="rubyOutline.html" class="theme-link" target="_blank" rel=noopener>
+                                    https://grokylin.github.io/blog/articles/rubyOutline.html
+                                </a>
+                            </span>
+                        </p>
+                        <p class="copyright-item">
+                            <span class="item-title">文章作者</span>
+                            <span class="item-content">
+                                <a href="../../index.html" class="theme-link" target="_blank" rel=noopener>
+                                    GeoKylin
+                                </a>
+                            </span>
+                        </p>
+                        <p class="copyright-item">
+                            <span class="item-title">最近更新</span>
+                            <span class="item-content">2019-01-29</span>
+                        </p>
+                        <p class="copyright-item">
+                            <span class="item-title">许可协议</span>
+                            <span class="item-content">
+                                <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel=noopener title="(CC BY 4.0)">
+                                    <i class="fab fa-creative-commons"></i>
+                                    创作共用 BY-NC-SA 4.0 国际许可证
+                                </a>
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="post-reward">
+                        <input type="checkbox" name="reward" id="reward" hidden />
+                        <label class="reward-button" for="reward">赞赏支持</label>
+                        <div class="qr-code">
+                            <label class="qr-code-image" for="reward">
+                                <img class="image" src="../donations/wechatpay-qr-code.jpg">
+                                <span>微信打赏</span>
+                            </label>
+                            <label class="qr-code-image" for="reward">
+                                <img class="image" src="../donations/alipay-qr-code.jpg">
+                                <span>支付宝打赏</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <footer class="post-footer">
+                        <!--<nav class="post-nav">-->
+                            <!--<a class="next" href=>-->
+                                <!--<span class="next-text nav-default">下一篇</span>-->
+                                <!--<span class="next-text nav-mobile">下一篇</span>-->
+                                <!--<i class="iconfont icon-right"></i>-->
+                            <!--</a>-->
+                        <!--</nav>-->
+                    </footer>
+                </article>
+            </div>
+
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (window.location.hostname === 'localhost') return;
+                    var disqus_config = function () {
+                        this.page.url = "https:\/\/blog.olowolo.com\/post\/generate-json-api-and-graphql-api-by-elide-and-spring\/";
+                        this.page.identifier = "\/post\/generate-json-api-and-graphql-api-by-elide-and-spring\/";
+                    };
+
+                    var dsq = document.createElement('script');
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    var disqus_shortname = 'blog-olowolo';
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                });
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+        </div>
+    </main>
+
+    <footer id="footer" class="footer" style="background-color: rgba(250,250,250,0.5)"></footer>
+
+    <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js"
+        integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js"
+        integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/even.ece58db6.min.js"></script>
+<script type="application/javascript">
+    var doNotTrack = false;
+    if (!doNotTrack) {
+        window.ga = window.ga || function () {
+            (ga.q = ga.q || []).push(arguments)
+        };
+        ga.l = +new Date;
+        ga('create', 'UA-93997803-4', 'auto');
+
+        ga('send', 'pageview');
+    }
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script type="text/javascript" src="../../js/canvas-nest.min.js" color="0,0,0" opacity='0.5' zIndex="-1" count="100"></script>
+<script src="../js/templet.js" rank="1"></script>
+</body>
+</html>
