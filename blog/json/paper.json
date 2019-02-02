@@ -1,5 +1,18 @@
 [
   {
+    "title": "安装 Ruby：Linux、macOS 和 Windows",
+    "date": "2019-02-01",
+    "words": "572",
+    "postLink": "installRuby.html",
+    "time": "2",
+    "category": "Ruby",
+    "tags": [
+      "编程语言",
+      "入门"
+    ],
+    "summary": "<p>通常，当你在计算机上安装 Ruby 的时候，你所安装的是“Ruby <a href=\"https://en.wikipedia.org/wiki/Interpreted_language\" target=\"_blank\">解释器</a>”，它的功能是理解以 Ruby 编写的程序，并提供丰富的功能扩展和程序库。对于那些某些版本包含而其他版本不包含的额外功能，你可以随时单独安装它们。本文将介绍如何在 Linux、macOS 和 Windows 操作系统上安装 Ruby ...</p>"
+  },
+  {
     "title": "Ruby 概述",
     "date": "2019-01-29",
     "words": "1353",
