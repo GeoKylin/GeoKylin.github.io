@@ -1,5 +1,18 @@
 [
   {
+    "title": "Ruby 环境",
+    "date": "2019-02-27",
+    "words": "1294",
+    "postLink": "rubyEnvironment.html",
+    "time": "3",
+    "category": "Ruby",
+    "tags": [
+      "编程语言",
+      "入门"
+    ],
+    "summary": "<p>本文将介绍如何执行 Ruby 解释器、Ruby 的顶层环境、如何调用操作系统命令以及 Ruby 的安全机制...</p>"
+  },
+  {
     "title": "安装 Ruby：Linux、macOS 和 Windows",
     "date": "2019-02-01",
     "words": "572",
