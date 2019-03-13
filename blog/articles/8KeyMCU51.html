@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>8键电子琴51单片机 | GeoKylin</title>
+    <meta property="og:title" content="8键电子琴51单片机 | GeoKylin"/>
+    <meta itemprop="name" content="8键电子琴51单片机 | GeoKylin">
+    <meta name="twitter:title" content="8键电子琴51单片机 | GeoKylin"/>
+    <meta name="keywords" content="8键电子琴51单片机, GeoKylin, 王锴, KaiWang, 博客, blog, 地球物理学, Geophysics, 地震学, Seismology"/>
+    <meta itemprop="keywords" content="8键电子琴51单片机, GeoKylin, 王锴, KaiWang, 博客, blog, 地球物理学, Geophysics, 地震学, Seismology"/>
+    
+    <meta name="description" content="本文以 STC12C2052AD 单片机为例讲解一个 8 键电子琴的程序是如何运作的，程序使用 Keil4 软件 C 语言编程。"/>
+    <meta property="og:description" content="本文以 STC12C2052AD 单片机为例讲解一个 8 键电子琴的程序是如何运作的，程序使用 Keil4 软件 C 语言编程。"/>
+    <meta itemprop="description" content="本文以 STC12C2052AD 单片机为例讲解一个 8 键电子琴的程序是如何运作的，程序使用 Keil4 软件 C 语言编程。">
+    <meta name="twitter:description" content="本文以 STC12C2052AD 单片机为例讲解一个 8 键电子琴的程序是如何运作的，程序使用 Keil4 软件 C 语言编程。"/>
+    
+    <link rel="canonical" href="https://geokylin.github.io/blog/articles/8KeyMCU51.html"/>
+    <meta property="og:url" content="https://geokylin.github.io/blog/articles/8KeyMCU51.html"/>
+    
+    <meta property="article:published_time" content="2019-03-12T00:00:00&#43;08:00"/>
+    <meta property="article:modified_time" content="2019-03-12T00:00:00&#43;08:00"/>
+    <meta itemprop="datePublished" content="2019-03-12T00:00:00&#43;08:00"/>
+    <meta itemprop="dateModified" content="2019-03-12T00:00:00&#43;08:00"/>
+    
+    <meta itemprop="wordCount" content="2000">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="robots" content="index, follow">
+    <meta name="renderer" content="webkit"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta http-equiv="Cache-Control" content="no-transform"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="theme-color" content="#f8f5ec"/>
+    <meta name="msapplication-navbutton-color" content="#f8f5ec">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+    <meta name="author" content="GeoKylin"/>
+    <meta name="generator" content="Hugo 0.53 with even 4.0.0"/>
+    <link rel="shortcut icon" type=image/x-icon href=../../img/favicon.png>
+    <link rel=icon type=image/x-icon href=../../img/favicon.png>
+    <link rel="apple-touch-icon" type=image/x-icon href="../../img/favicon.png">
+    <link rel="manifest" href="../man/manifest.json">
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="../css/even.c1094c8f.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css"
+          integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+    <link rel=stylesheet href=https://use.fontawesome.com/releases/v5.6.0/css/all.css crossorigin=anonymous>
+    <meta property="og:type" content="article"/>
+    <meta name="twitter:card" content="summary"/>
+    <!--[if lte IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body style="background-color: rgba(250,250,250,0.5)">
+<div id="mobile-navbar" class="mobile-navbar"></div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu"></nav>
+<div class="container" id="mobile-panel">
+    <header id="header" class="header" style="background-color: rgba(250,250,250,0.5)"></header>
+    <main id="main" class="main">
+        <div class="content-wrapper">
+            <div id="content" class="content">
+                <article class="post">
+
+                    <header class="post-header">
+                        <h1 class="post-title"><b>51 单片机：一个 8 键电子琴是如何运作的</b></h1>
+                        <div class="post-meta">
+                            <span class="post-time">
+                                <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                2019-03-12
+                            </span>
+                            <span class="more-meta">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                约 2000 字
+                            </span>
+                            <span class="more-meta">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                预计阅读 5 分钟
+                            </span>
+                            <span class="more-meta">
+                                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                    <a href="../categories/51单片机/">51单片机</a>
+                                </span>
+                            <div class="post-tags">
+                                <i class="fa fa-tag" aria-hidden="true"></i>
+                                <a href="../tags/设计制作/">设计制作</a>
+                                <i class="fa fa-tag" aria-hidden="true"></i>
+                                <a href="../tags/工程项目/">工程项目</a>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!----------------------- 目录 ---------------------->
+                    <div class="post-toc" id="post-toc">
+                        <h2 class="post-toc-title">文章目录</h2>
+                        <div class="post-toc-content">
+                            <nav id="TableOfContents">
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li><a href="#材料清单">材料清单</a></li>
+                                            <li><a href="#电路原理图">电路原理图</a></li>
+                                            <li><a href="#C 程序代码">C 程序代码</a></li>
+                                            <li><a href="#程序是如何运行的">程序是如何运行的</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!----------------------- 正文 ---------------------->
+                    <div class="post-content">
+                        <p>本文以 <a href="http://www.stcmicro.com/cn/stc/stc12c2052.html" target="_blank">STC12C2052AD</a> 单片机为例讲解一个 8 键电子琴的程序是如何运作的，程序使用 <a href="https://baike.baidu.com/item/keil/4082184?fr=aladdin" target="_blank">Keil4</a> 软件 C 语言编程。</p>
+
+                        <div class="admonition tip"><p class="admonition-title">Tip</p>
+                            <p>
+                                本文中的工程项目可在 <a href="https://github.com/GeoKylin/8KeyMCU51" target="_blank">https://github.com/GeoKylin/8KeyMCU51</a> 中查看。
+                            </p>
+                        </div>
+
+                        <h2 id="材料清单"><b>材料清单</b></h2>
+
+                        <p>硬件：</p>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th align="center">元件</th>
+                                <th align="center">型号</th>
+                                <th align="center">数量</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td align="center"><a href="https://baike.baidu.com/item/%E9%9D%A2%E5%8C%85%E6%9D%BF/4703361?fr=aladdin" target="_blank">面包板</a></td>
+                                <td align="center">2.54 mm 间距</td>
+                                <td align="center">1</td>
+                            </tr>
+                            <tr>
+                                <td align="center">电池盒</td>
+                                <td align="center">3 节 5 号</td>
+                                <td align="center">1</td>
+                            </tr>
+                            <tr>
+                                <td align="center">单片机</td>
+                                <td align="center">STC12C2052AD</td>
+                                <td align="center">1</td>
+                            </tr>
+                            <tr>
+                                <td align="center">晶振</td>
+                                <td align="center">12 MHz</td>
+                                <td align="center">1</td>
+                            </tr>
+                            <tr>
+                                <td align="center">电容</td>
+                                <td align="center">30 pF</td>
+                                <td align="center">2</td>
+                            </tr>
+                            <tr>
+                                <td align="center">扬声器</td>
+                                <td align="center">5 V</td>
+                                <td align="center">1</td>
+                            </tr>
+                            <tr>
+                                <td align="center">电阻</td>
+                                <td align="center">100</td>
+                                <td align="center">8</td>
+                            </tr>
+                            <tr>
+                                <td align="center">微动开关</td>
+                                <td align="center">6 mm * 6 mm * 5 mm</td>
+                                <td align="center">8</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <p>软件：</p>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th align="center">名称</th>
+                                <th align="center">开发公司</th>
+                                <th align="center">描述</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td align="center">Keil4</td>
+                                <td align="center">Keil Software</td>
+                                <td align="center">51 系列兼容单片机 C 语言软件开发系统</td>
+                            </tr>
+                            <tr>
+                                <td align="center"><a href="https://baike.baidu.com/item/STC-ISP/304145?fr=aladdin" target="_blank">STC-ISP</a></td>
+                                <td align="center">宏晶科技有限公司</td>
+                                <td align="center">单片机下载编程烧录软件</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <h2 id="电路原理图"><b>电路原理图</b></h2>
+                        <p>电路原理图：</p>
+                        <img src="img/8KeyMCU51/001.png" alt="电路原理图"/>
+                        <p>实际连接图：</p>
+                        <img src="img/8KeyMCU51/002.jpg" alt="实际连接图"/>
+
+                        <h2 id="C 程序代码"><b>C 程序代码</b></h2>
+                        <img src="img/8KeyMCU51/003.png" alt="C 程序代码"/>
+
+                        <h2 id="程序是如何运行的"><b>程序是如何运行的</b></h2>
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">#include &#60;STC12C2052AD.H&#62;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>引用 STC12C2052AD.H 头文件，它是由 STC-ISP 软件导出的、用于 STC12C2052AD 单片机的头文件，其内容是定义一系列 <a href="https://baike.baidu.com/item/%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD%E5%AF%84%E5%AD%98%E5%99%A8/301108?fr=aladdin" target="_blank">SFR (Special Function Register，特殊功能寄存器)</a> 的地址，下文会再次提及。</p>
+                        <img src="img/8KeyMCU51/004.png" alt="STC12C2051AD头文件"/>
+                        <p><b>特殊功能寄存器</b>，是 51 单片机中各功能部件对应的寄存器，用于存放相应功能部件的控制命令，状态或数据，下文会再次提及。</p>
+                        <img src="img/8KeyMCU51/005.png" alt="特殊功能寄存器完整表">
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">2
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">#define STATUS P1</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>定义 STATUS 来表示第 1 组 I/O 引脚 P1 的状态，这组引脚共有 8 个，从 P1.0 到 P1.7，P1 在 SFR 表中的地址为 0x90 (0x 表示 16 进制数)，指向 1 个字节，该字节中的 8 位分别由低到高分别是 P1.0 到 P1.7 引脚的电位高低，高电位为 1，低电位为 0。</p>
+                        <img src="img/8KeyMCU51/006.png" alt="P1地址">
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">3
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">sbit SPEAKER = P3^7;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p><b>扬声器</b>所在的引脚是 P3.7，sbit 是<a href="https://baike.baidu.com/item/%E4%BD%8D%E5%AF%BB%E5%9D%80/8643131" target="_blank">按位寻址</a>的变量类型，指向第 3 组 I/O 引脚 P3 的第 8 位，与 P1 相似，P3 在 SFR 表中的地址为 0xB0，^ 是<a href="https://baike.baidu.com/item/%E5%BC%82%E6%88%96/10993677?fr=aladdin" target="_blank">按位异或运算符</a>，进行运算的两个数对应二进制位相同时值为 0，不同时值为 1。0xB0 的二进制表示是 1011 0000，7 的二进制表示是 0000 0111，因此 P3^7 = 0xB0^7 = 1011 0111 = 0xB7。</p>
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">unsigned char KEY;</span>
+<span class="p">unsigned char tTH0;</span>
+<span class="p">unsigned char tTL0;</span>
+<span class="p">unsigned int code music[]={</span>
+<span class="p">64021,64103,64260,64400, </span><span class="c1">//e1, f1, g1, a1</span>
+<span class="p">64524,64580,64684,64777, </span><span class="c1">//b1, c2, d2, e2</span>
+<span class="p">64820,64898,64968,65030, </span><span class="c1">//f2, g2, a2, b2</span>
+<span class="p">65058,65110,65157,65178  </span><span class="c1">//c3, d3, e3, f3</span>
+<span class="p">};</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>music 数组用于控制蜂鸣器发出声音的频率。STC12C2052AD 单片机的 P3.7 引脚又称 PWM0，可以用来输出调制电波，它通过定时器来实现。对于 16 位定时器，它可以存放的最大整数为 65535，给定一个定时器的初值 N，它会累加到 65535，然后将输入到 PWM 引脚的电流反相，如此反复来达到输出调制电波的需求。而对于本电路使用的 12MHz 晶振来说，它的<a href="https://baike.baidu.com/item/%E6%9C%BA%E5%99%A8%E5%91%A8%E6%9C%9F/276831?fr=aladdin" target="_blank">机器周期</a>为 1us (12 个震荡周期)。因此电流的半周期为 T/2 = (65535 - N)*1us，电流的周期为 T = 2*(65535 - N)*1us，频率为 F = 1/T = 1/(2*(65535 - N))MHz = 500000/(65535 - N)Hz。因此，对于给定音高的频率 F (单位为 Hz)，它的定时器初值应该为 N = 65535 - 500000/F。为此我们查找<a href="https://baike.baidu.com/item/%E5%8D%81%E4%BA%8C%E5%B9%B3%E5%9D%87%E5%BE%8B/592297?fr=aladdin" target="_blank">十二平均律</a>音高与频率对照表，可以得到各个音高的频率，于是就可以计算得到上面给出的 music 数组。例如定时器的初值为 64021，它对应的扬声器的频率为 500000/(65535 - 64021) = 330Hz，它发出的音高是 e1。</p>
+                        <img src="img/8KeyMCU51/007.png" alt="12平均律音高与频率对照表">
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">void main(void){</span>
+	<span class="p">TMOD=0x01;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>TMOD 在 SFR 表中的地址为 0x89，它的 8 个位用于设置定时器的定时方式，高 4 位用于设置定时器 T1，低 4 位用于设置定时器 T0，这里的设置为 TMOD = 0x01 = 0000 0001。具体设置如下：GATE 为门控制（GATE = 0 时，TR0 = 0 时则启动定时器 T0，下文会提及），C/T 为功能选择（C/T = 0 时启用定时功能，C/T = 1 时启用计数功能），M1 和 M0 共同设置定时器的工作方式（共有四种方式，其中 M1 = 0，M0 = 1 时启用 16 位定时器）。</p>
+                        <img src="img/8KeyMCU51/008.png" alt="TMOD地址">
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">	ET0=1;</span>
+	<span class="p">EA=1;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>EA 和 ET0 分别为 SFR 表中 IE (中断控制寄存器)的第 8 位和第 2 位，ET0 = 1 时允许定时器 T0 中断，EA = 1 时 CPU 开放中断，相当于一个总开关，它是允许定时器 T0 中断的前提。</p>
+                        <img src="img/8KeyMCU51/009.png" alt="IE地址">
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">17
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">	STATUS = 0xff;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>因为 0xff = 1111 1111，所以这一句的含义是将 P1.0 到 P1.7 八个引脚设置为高电位。从电路图上来看，当有一个按键按下时，对应的引脚将和地线 GND 接通，此时该引脚被强制变为低电位，由于 CPU 和定时器 T0 的中断允许已经开启，因此这种高低电位的变化将会引起定时器 T0 的中断，也就是调用 T0 的中断函数。</p>
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">	while(1){</span>
+		<span class="p">if(STATUS != 0xff){</span>
+			<span class="p">switch(~STATUS){</span>
+				<span class="p">case 0x01:</span>
+					<span class="p">KEY = 7;</span>
+					<span class="p">break;</span>
+				<span class="p">case 0x02:</span>
+					<span class="p">KEY = 6;</span>
+					<span class="p">break;</span>
+				<span class="p">case 0x04:</span>
+					<span class="p">KEY = 5;</span>
+					<span class="p">break;</span>
+				<span class="p">case 0x08:</span>
+					<span class="p">KEY = 4;</span>
+					<span class="p">break;</span>
+				<span class="p">case 0x10:</span>
+					<span class="p">KEY = 3;</span>
+					<span class="p">break;</span>
+				<span class="p">case 0x20:</span>
+					<span class="p">KEY = 2;</span>
+					<span class="p">break;</span>
+				<span class="p">case 0x40:</span>
+					<span class="p">KEY = 1;</span>
+					<span class="p">break;</span>
+				<span class="p">case 0x80:</span>
+					<span class="p">KEY = 0;</span>
+					<span class="p">break;</span>
+			<span class="p">}</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>当有按键被按下的时候，8 个引脚的状态将不再是 1111 1111，这时我们需要判断是哪一个按键被按下，然后调用音符数组中对应的声音频率的定时器初值就可以了。例如当 P1.3 引脚对应的按键被按下时，STATUS = 1111 0111，那么它的反状态就是 0000 1000 = 0x08，这时我们取音符数组中的下标为 4 的音符，也就是 b1 音。以此类推，P1.0 到 P1.7 引脚的按键对应的音高分别是 e2、d2、c2、b1、a1、g1、f1 和 e1。</p>
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">			tTH0=music[KEY]/256;</span>
+			<span class="p">tTL0=music[KEY]%256;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>这里的 tTH0 是将 music 数组中的元素除以 256 取整，相当于取定时器初值的高 8 位。这时因为单片机寄存器是 8 位的，而定时器用的是 16 位的，因此需要把定时器的高 8 位和低 8 位单独存放到一个寄存器地址，而 256 = 2^8，因此 tTH0 表示的是定时器初值的高 8 位。同理，tTL0 是将 music 数组中的元素除以 256 取余，因此它表示的是定时器初值的低 8 位。</p>
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">48
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">			TR0=1;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>TR0 是 SFR 表中 TCON（定时器控制寄存器）第 5 位，TR0 = 1 时将启动定时器，TR0 = 0 时关闭定时器。</p>
+                        <img src="img/8KeyMCU51/010.png" alt="TCON地址">
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">		}else{</span>
+			<span class="p">SPEAKER = 1;</span>
+			<span class="p">TR0=0;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>当没有按键被按下的时候关闭扬声器和定时器 T0，因为扬声器的正极连接在 VCC 上，因此是高电位，所以当 SPEAKER = 1 时，扬声器负极引脚也为高电位，此时扬声器中没有电流通过，因此扬声器不会发出声音。</p>
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">		}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="p"></span>
+<span class="p">void t0(void) interrupt 1 using 0{</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>这是定时器 T0 的中断函数，interrupt 1 是指该函数是定时器 T0 的中断函数，using 0 是指用的是第 0 组寄存器即 TH0 和 TL0。</p>
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">	TH0=tTH0;</span>
+	<span class="p">TL0=tTL0;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>TH0 和 TL0 在 SFR 表中的地址分别为 0x8C 和 0x8A，分别用于存放定时器 T0 初值的高 8 位和低 8 位。</p>
+                        <img src="img/8KeyMCU51/011.png" alt="TH0与TL0地址">
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">59
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">	SPEAKER=~SPEAKER;</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>这一句是让扬声器发出声音，因为在没有按键按下的时候，P3.7 引脚始终被设置为高电位，即 SPEAKER = 1，因此它的反状态为 0，也即低电位，此时扬声器正负极间存在高低电位差，扬声器将发出声音，而声音的频率则由 TH0 和 TL0 来决定。</p>
+
+                        <!-- 命令：nx；变量：s1；字符串：k；符号：p；注释：c1 -->
+                        <div class="highlight">
+                            <div class="chroma">
+                                <table class="lntable">
+                                    <tr>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">60
+</span></code></pre>
+                                        </td>
+                                        <td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="p">}</span>
+</code></pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!------------ 本文链接 ------------>
+                    <div class="post-copyright">
+                        <p class="copyright-item">
+                            <span class="item-title">本文链接</span>
+                            <span class="item-content">
+                                <a href="8KeyMCU51.html" class="theme-link" target="_blank" rel=noopener>
+                                    https://geokylin.github.io/blog/articles/8KeyMCU51.html
+                                </a>
+                            </span>
+                        </p>
+                        <p class="copyright-item">
+                            <span class="item-title">文章作者</span>
+                            <span class="item-content">
+                                <a href="../../index.html" class="theme-link" target="_blank" rel=noopener>
+                                    GeoKylin
+                                </a>
+                            </span>
+                        </p>
+                        <p class="copyright-item">
+                            <span class="item-title">最近更新</span>
+                            <span class="item-content">2019-03-12</span>
+                        </p>
+                        <p class="copyright-item">
+                            <span class="item-title">许可协议</span>
+                            <span class="item-content">
+                                <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel=noopener title="(CC BY 4.0)">
+                                    <i class="fab fa-creative-commons"></i>
+                                    创作共用 BY-NC-SA 4.0 国际许可证
+                                </a>
+                            </span>
+                        </p>
+                    </div>
+
+                    <!----------- 赞赏支持 ----------->
+                    <div class="post-reward">
+                        <input type="checkbox" name="reward" id="reward" hidden />
+                        <label class="reward-button" for="reward">赞赏支持</label>
+                        <div class="qr-code">
+                            <label class="qr-code-image" for="reward">
+                                <img class="image" src="../donations/wechatpay-qr-code.jpg">
+                                <span>微信打赏</span>
+                            </label>
+                            <label class="qr-code-image" for="reward">
+                                <img class="image" src="../donations/alipay-qr-code.jpg">
+                                <span>支付宝打赏</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!------------ 下一篇 ------------>
+                    <footer class="post-footer">
+                        <nav class="post-nav">
+                            <a class="prev" href="rubyEnvironment.html">
+                                <i class="iconfont icon-left"></i>
+                                <span class="prev-text nav-default">上一篇：Ruby 环境</span>
+                                <span class="prev-text nav-mobile">上一篇</span>
+                            </a>
+                            <!--<a class="next" href="installRuby.html">-->
+                            <!--<span class="next-text nav-default">下一篇：</span>-->
+                            <!--<span class="next-text nav-mobile">下一篇</span>-->
+                            <!--<i class="iconfont icon-right"></i>-->
+                            <!--</a>-->
+                        </nav>
+                    </footer>
+                </article>
+            </div>
+
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (window.location.hostname === 'localhost') return;
+                    var disqus_config = function () {
+                        this.page.url = "https:\/\/blog.olowolo.com\/post\/generate-json-api-and-graphql-api-by-elide-and-spring\/";
+                        this.page.identifier = "\/post\/generate-json-api-and-graphql-api-by-elide-and-spring\/";
+                    };
+
+                    var dsq = document.createElement('script');
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    var disqus_shortname = 'blog-olowolo';
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                });
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+        </div>
+    </main>
+
+    <footer id="footer" class="footer" style="background-color: rgba(250,250,250,0.5)"></footer>
+
+    <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js"
+        integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js"
+        integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/even.ece58db6.min.js"></script>
+<script type="application/javascript">
+    var doNotTrack = false;
+    if (!doNotTrack) {
+        window.ga = window.ga || function () {
+            (ga.q = ga.q || []).push(arguments)
+        };
+        ga.l = +new Date;
+        ga('create', 'UA-93997803-4', 'auto');
+
+        ga('send', 'pageview');
+    }
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script type="text/javascript" src="../../js/canvas-nest.min.js" color="0,0,0" opacity='0.5' zIndex="-1" count="100"></script>
+<script src="../js/templet.js" rank="1"></script>
+</body>
+</html>

@@ -1,5 +1,18 @@
 [
   {
+    "title": "51 单片机：一个 8 键电子琴是如何运作的",
+    "date": "2019-03-12",
+    "words": "2000",
+    "postLink": "8KeyMCU51.html",
+    "time": "5",
+    "category": "51单片机",
+    "tags": [
+      "设计制作",
+      "工程项目"
+    ],
+    "summary": "<p>本文以 <a href=\"http://www.stcmicro.com/cn/stc/stc12c2052.html\" target=\"_blank\">STC12C2052AD</a> 单片机为例讲解一个 8 键电子琴的程序是如何运作的，程序使用 <a href=\"https://baike.baidu.com/item/keil/4082184?fr=aladdin\" target=\"_blank\">Keil4</a> 软件 C 语言编程 ...</p>"
+  },
+  {
     "title": "Ruby 环境",
     "date": "2019-02-27",
     "words": "1294",
@@ -10,7 +23,7 @@
       "编程语言",
       "入门"
     ],
-    "summary": "<p>本文将介绍如何执行 Ruby 解释器、Ruby 的顶层环境、如何调用操作系统命令以及 Ruby 的安全机制...</p>"
+    "summary": "<p>本文将介绍如何执行 Ruby 解释器、Ruby 的顶层环境、如何调用操作系统命令以及 Ruby 的安全机制 ...</p>"
   },
   {
     "title": "安装 Ruby：Linux、macOS 和 Windows",
